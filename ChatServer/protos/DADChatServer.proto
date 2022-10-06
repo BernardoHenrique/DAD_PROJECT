@@ -3,6 +3,7 @@
 service ChatServerService {
   rpc Register (ChatClientRegisterRequest) returns (ChatClientRegisterReply);
   rpc BcastMsg (BcastMsgRequest) returns (BcastMsgReply);
+  rpc SendMsg (SendMsgRequest) returns (SendMsgReply);
 }
 message ChatClientRegisterRequest {
   string nick = 1;
@@ -23,3 +24,10 @@ message BcastMsgReply {
 	bool ok = 1;
 }
 
+message SendMsgRequest {
+  string nick = 1;
+  string msg = 2;	
+}
+message SendMsgReply {
+	bool ok = 1;
+}

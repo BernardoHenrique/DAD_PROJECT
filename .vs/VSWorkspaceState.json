@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ChatServer",
+    "\\ChatServer\\protos",
+    "\\ConsoleChatClient",
+    "\\ConsoleChatClient\\protos"
+  ],
+  "SelectedNode": "\\ChatServer\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}

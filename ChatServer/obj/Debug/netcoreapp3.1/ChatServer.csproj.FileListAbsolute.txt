@@ -24,3 +24,29 @@ C:\Users\Hugo\OneDrive\Ambiente de Trabalho\MEIC\DAD\labs\lab2\DADChat-grpc\Chat
 C:\Users\Hugo\OneDrive\Ambiente de Trabalho\MEIC\DAD\labs\lab2\DADChat-grpc\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.dll
 C:\Users\Hugo\OneDrive\Ambiente de Trabalho\MEIC\DAD\labs\lab2\DADChat-grpc\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.pdb
 C:\Users\Hugo\OneDrive\Ambiente de Trabalho\MEIC\DAD\labs\lab2\DADChat-grpc\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.genruntimeconfig.cache
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.exe
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.deps.json
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.runtimeconfig.json
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.runtimeconfig.dev.json
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.pdb
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\Google.Protobuf.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\Grpc.Core.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\Grpc.Core.Api.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\Grpc.Net.Client.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\Grpc.Net.Common.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\libgrpc_csharp_ext.arm64.so
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libgrpc_csharp_ext.x64.so
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libgrpc_csharp_ext.x64.dylib
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\grpc_csharp_ext.x64.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\grpc_csharp_ext.x86.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.csproj.AssemblyReference.cache
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.AssemblyInfoInputs.cache
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.AssemblyInfo.cs
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.csproj.CoreCompileInputs.cache
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.csproj.CopyComplete
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.dll
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.pdb
+C:\Users\Hugo\ProjetosIST\DAD\DAD_PROJECT\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.genruntimeconfig.cache

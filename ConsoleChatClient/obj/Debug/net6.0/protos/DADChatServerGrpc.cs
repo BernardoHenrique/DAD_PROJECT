@@ -52,6 +52,10 @@ public static partial class ChatServerService
   static readonly grpc::Marshaller<global::BcastMsgRequest> __Marshaller_BcastMsgRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::BcastMsgRequest.Parser));
   [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
   static readonly grpc::Marshaller<global::BcastMsgReply> __Marshaller_BcastMsgReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::BcastMsgReply.Parser));
+  [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+  static readonly grpc::Marshaller<global::SendMsgRequest> __Marshaller_SendMsgRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SendMsgRequest.Parser));
+  [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+  static readonly grpc::Marshaller<global::SendMsgReply> __Marshaller_SendMsgReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SendMsgReply.Parser));
 
   [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
   static readonly grpc::Method<global::ChatClientRegisterRequest, global::ChatClientRegisterReply> __Method_Register = new grpc::Method<global::ChatClientRegisterRequest, global::ChatClientRegisterReply>(
@@ -68,6 +72,14 @@ public static partial class ChatServerService
       "BcastMsg",
       __Marshaller_BcastMsgRequest,
       __Marshaller_BcastMsgReply);
+
+  [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+  static readonly grpc::Method<global::SendMsgRequest, global::SendMsgReply> __Method_SendMsg = new grpc::Method<global::SendMsgRequest, global::SendMsgReply>(
+      grpc::MethodType.Unary,
+      __ServiceName,
+      "SendMsg",
+      __Marshaller_SendMsgRequest,
+      __Marshaller_SendMsgReply);
 
   /// <summary>Service descriptor</summary>
   public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -141,6 +153,26 @@ public static partial class ChatServerService
     public virtual grpc::AsyncUnaryCall<global::BcastMsgReply> BcastMsgAsync(global::BcastMsgRequest request, grpc::CallOptions options)
     {
       return CallInvoker.AsyncUnaryCall(__Method_BcastMsg, null, options, request);
+    }
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    public virtual global::SendMsgReply SendMsg(global::SendMsgRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+    {
+      return SendMsg(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+    }
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    public virtual global::SendMsgReply SendMsg(global::SendMsgRequest request, grpc::CallOptions options)
+    {
+      return CallInvoker.BlockingUnaryCall(__Method_SendMsg, null, options, request);
+    }
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    public virtual grpc::AsyncUnaryCall<global::SendMsgReply> SendMsgAsync(global::SendMsgRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+    {
+      return SendMsgAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+    }
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    public virtual grpc::AsyncUnaryCall<global::SendMsgReply> SendMsgAsync(global::SendMsgRequest request, grpc::CallOptions options)
+    {
+      return CallInvoker.AsyncUnaryCall(__Method_SendMsg, null, options, request);
     }
     /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

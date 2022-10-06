@@ -32,19 +32,21 @@ public class Program {
     public static void Main(string[] args)
     {
         GrpcChannel channel;
-        ChatServerService.ChatServerServiceClient chatServerStub;
 
-        Console.WriteLine("Insira o seu nick:");
+        Console.WriteLine("Insira a sua rassa:");
         string nick = Console.ReadLine();
         Console.WriteLine("Insira o seu porto:");
         string portString = Console.ReadLine();
         AppContext.SetSwitch(
     "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-        string serverHostname = "localhost";
-        object serverPort = "1001";
-        channel = GrpcChannel.ForAddress("http://" + serverHostname + ":" + serverPort.ToString());
-        chatServerStub = new ChatServerService.ChatServerServiceClient(channel);
+    
+        var serverPorts = new List<int> { 1001, 1002, 1003};
+
+        ChatClientRegisterReply reply = null;
+
+        var serverName = "localhost";
         string hostname = "localhost";
+        var chatServerStubList = new List<ChatServerService.ChatServerServiceClient>();
         Server server = new Server
         {
             Services = { ChatClientService.BindService(new ClientService()) },
@@ -52,17 +54,24 @@ public class Program {
         };
         server.Start();
 
-        ChatClientRegisterReply reply = chatServerStub.Register(new ChatClientRegisterRequest
+        for(int i = 0; i < serverPorts.Count(); i++)
         {
-            Nick = nick,
-            Url = "http://localhost:" + portString
-        });
+            channel = GrpcChannel.ForAddress("http://" + serverName + ":" + serverPorts[i].ToString());
+            chatServerStubList[i] = new ChatServerService.ChatServerServiceClient(channel);
+
+            reply = chatServerStubList[i].Register(new ChatClientRegisterRequest
+            {
+                Nick = nick,
+                Url = "http://localhost:" + portString
+            });
+        }
+
         Console.WriteLine(reply.ToString());
         string msg;
         while (true) {
-            Console.Write("me: ");
             msg = Console.ReadLine();
-            chatServerStub.BcastMsg(new BcastMsgRequest { Nick = nick, Msg = msg});
+
+            
         }
     }
 

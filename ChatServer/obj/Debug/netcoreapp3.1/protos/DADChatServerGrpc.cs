@@ -52,6 +52,10 @@ public static partial class ChatServerService
   static readonly grpc::Marshaller<global::BcastMsgRequest> __Marshaller_BcastMsgRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::BcastMsgRequest.Parser));
   [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
   static readonly grpc::Marshaller<global::BcastMsgReply> __Marshaller_BcastMsgReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::BcastMsgReply.Parser));
+  [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+  static readonly grpc::Marshaller<global::SendMsgRequest> __Marshaller_SendMsgRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SendMsgRequest.Parser));
+  [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+  static readonly grpc::Marshaller<global::SendMsgReply> __Marshaller_SendMsgReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SendMsgReply.Parser));
 
   [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
   static readonly grpc::Method<global::ChatClientRegisterRequest, global::ChatClientRegisterReply> __Method_Register = new grpc::Method<global::ChatClientRegisterRequest, global::ChatClientRegisterReply>(
@@ -68,6 +72,14 @@ public static partial class ChatServerService
       "BcastMsg",
       __Marshaller_BcastMsgRequest,
       __Marshaller_BcastMsgReply);
+
+  [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+  static readonly grpc::Method<global::SendMsgRequest, global::SendMsgReply> __Method_SendMsg = new grpc::Method<global::SendMsgRequest, global::SendMsgReply>(
+      grpc::MethodType.Unary,
+      __ServiceName,
+      "SendMsg",
+      __Marshaller_SendMsgRequest,
+      __Marshaller_SendMsgReply);
 
   /// <summary>Service descriptor</summary>
   public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -91,6 +103,12 @@ public static partial class ChatServerService
       throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    public virtual global::System.Threading.Tasks.Task<global::SendMsgReply> SendMsg(global::SendMsgRequest request, grpc::ServerCallContext context)
+    {
+      throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+    }
+
   }
 
   /// <summary>Creates service definition that can be registered with a server</summary>
@@ -100,7 +118,8 @@ public static partial class ChatServerService
   {
     return grpc::ServerServiceDefinition.CreateBuilder()
         .AddMethod(__Method_Register, serviceImpl.Register)
-        .AddMethod(__Method_BcastMsg, serviceImpl.BcastMsg).Build();
+        .AddMethod(__Method_BcastMsg, serviceImpl.BcastMsg)
+        .AddMethod(__Method_SendMsg, serviceImpl.SendMsg).Build();
   }
 
   /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -112,6 +131,7 @@ public static partial class ChatServerService
   {
     serviceBinder.AddMethod(__Method_Register, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ChatClientRegisterRequest, global::ChatClientRegisterReply>(serviceImpl.Register));
     serviceBinder.AddMethod(__Method_BcastMsg, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::BcastMsgRequest, global::BcastMsgReply>(serviceImpl.BcastMsg));
+    serviceBinder.AddMethod(__Method_SendMsg, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SendMsgRequest, global::SendMsgReply>(serviceImpl.SendMsg));
   }
 
 }

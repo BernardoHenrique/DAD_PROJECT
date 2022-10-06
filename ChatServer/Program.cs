@@ -1,30 +1,72 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace chatServer {
     // ChatServerService is the namespace defined in the protobuf
     // ChatServerServiceBase is the generated base implementation of the service
     public class ServerService : ChatServerService.ChatServerServiceBase {
+
         private GrpcChannel channel;
         private Dictionary<string, ChatClientService.ChatClientServiceClient> clientMap =
             new Dictionary<string, ChatClientService.ChatClientServiceClient>();
+
+        private Dictionary<string, double> bankAccounts =
+            new Dictionary<string, double>();
+
+        private Dictionary<string, string> msgList =
+            new Dictionary<string, string>();
 
         public ServerService() {
         }
 
         public override Task<ChatClientRegisterReply> Register(
             ChatClientRegisterRequest request, ServerCallContext context) {
-            Console.WriteLine("Deadline: " + context.Deadline);
             Console.WriteLine("Host: " + context.Host);
-            Console.WriteLine("Method: " + context.Method);
-            Console.WriteLine("Peer: " + context.Peer);
             return Task.FromResult(Reg(request));
+        }
+
+        public override Task<SendMsgReply> SendMsg(
+            SendMsgRequest request, ServerCallContext context) {
+            return Task.FromResult(Send(request));
+        }
+
+        public SendMsgReply Send(SendMsgRequest request)
+        {
+             lock (this) {
+                msgList.Add(request.Nick, request.Msg);
+            }
+
+            Console.WriteLine($"Msg received from client {request.Nick}");
+            SendMsgReply reply = new SendMsgReply();
+
+            return reply;
+        }
+
+
+        public ChatClientRegisterReply Reg(ChatClientRegisterRequest request) {
+                //Thread.Sleep(5001);
+                channel = GrpcChannel.ForAddress(request.Url);
+                ChatClientService.ChatClientServiceClient client =
+                    new ChatClientService.ChatClientServiceClient(channel);
+            lock (this) {
+                clientMap.Add(request.Nick, client);
+                bankAccounts.Add(request.Nick, 0);
+            }
+            Console.WriteLine($"Registered client {request.Nick} with URL {request.Url}");
+            ChatClientRegisterReply reply = new ChatClientRegisterReply();
+            lock (this) {
+                foreach (string nick in clientMap.Keys) {
+                    reply.Users.Add(new User { Nick = nick });
+                }
+            }
+            return reply;
         }
 
         public override Task<BcastMsgReply> BcastMsg(BcastMsgRequest request, ServerCallContext context) {
@@ -57,24 +99,6 @@ namespace chatServer {
                 Ok = true
             };
         }
-
-        public ChatClientRegisterReply Reg(ChatClientRegisterRequest request) {
-                //Thread.Sleep(5001);
-                channel = GrpcChannel.ForAddress(request.Url);
-                ChatClientService.ChatClientServiceClient client =
-                    new ChatClientService.ChatClientServiceClient(channel);
-            lock (this) {
-                clientMap.Add(request.Nick, client);
-            }
-            Console.WriteLine($"Registered client {request.Nick} with URL {request.Url}");
-            ChatClientRegisterReply reply = new ChatClientRegisterReply();
-            lock (this) {
-                foreach (string nick in clientMap.Keys) {
-                    reply.Users.Add(new User { Nick = nick });
-                }
-            }
-            return reply;
-        }
     }
     class Program {
         
@@ -99,7 +123,9 @@ namespace chatServer {
             //Configuring HTTP for client connections in Register method
             AppContext.SetSwitch(
   "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            while (true) ;
+            while (true)
+            {
+            }
         }
     }
 }
