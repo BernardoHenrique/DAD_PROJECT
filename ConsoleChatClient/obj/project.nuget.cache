@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "XaDao5bO5om3xST5VTraOv2DLaDpnxVwpoiQGdkBnYJeVrckqPF2HlNCdWqsz2cRPdhRfjeOSvLliX85oma6jQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Hugo\\OneDrive\\Ambiente de Trabalho\\MEIC\\DAD\\labs\\lab2\\DADChat-grpc\\ConsoleChatClient\\ConsoleChatClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Hugo\\.nuget\\packages\\google.protobuf\\3.21.7\\google.protobuf.3.21.7.nupkg.sha512",
+    "C:\\Users\\Hugo\\.nuget\\packages\\grpc.core\\2.46.5\\grpc.core.2.46.5.nupkg.sha512",
+    "C:\\Users\\Hugo\\.nuget\\packages\\grpc.core.api\\2.49.0\\grpc.core.api.2.49.0.nupkg.sha512",
+    "C:\\Users\\Hugo\\.nuget\\packages\\grpc.net.client\\2.49.0\\grpc.net.client.2.49.0.nupkg.sha512",
+    "C:\\Users\\Hugo\\.nuget\\packages\\grpc.net.common\\2.49.0\\grpc.net.common.2.49.0.nupkg.sha512",
+    "C:\\Users\\Hugo\\.nuget\\packages\\grpc.tools\\2.49.1\\grpc.tools.2.49.1.nupkg.sha512",
+    "C:\\Users\\Hugo\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.3\\microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
+    "C:\\Users\\Hugo\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
+  "logs": []
+}

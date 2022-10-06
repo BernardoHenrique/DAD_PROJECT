@@ -1,0 +1,2 @@
+obj\Release\net6.0\protos/DADChatServer.cs \
+obj\Release\net6.0\protos/DADChatServerGrpc.cs: protos/DADChatServer.proto
