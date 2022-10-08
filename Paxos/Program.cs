@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 namespace chatPaxos {
     public class PaxosService : ChatPaxosService.ChatPaxosServiceBase {
@@ -16,24 +17,39 @@ namespace chatPaxos {
         private Dictionary<string, ArrayList> unorderedCmd =
             new Dictionary<string, ArrayList>();
 
+        private Dictionary<int, ArrayList> slots =
+            new Dictionary<int, ArrayList>();
+
         private ArrayList output = new ArrayList();
+
+        private int nrRcvd = 0;
 
         public PaxosService() {
         }
 
-        public override Task<SendMsgReply> SendMsg(
-            SendMsgRequest request, ServerCallContext context) {
+        public int getNr()
+        {
+            return nrRcvd;
+        }
+
+        public Dictionary<string, ArrayList> getUnorderedList()
+        {
+            return unorderedCmd;
+        }
+
+        public override Task<CompareAndSwapReply> CompareAndSwap(
+            CompareAndSwapRequest request, ServerCallContext context) {
             return Task.FromResult(Send(request));
         }
 
-        public SendMsgReply Send(SendMsgRequest request)
+        public CompareAndSwapReply Send(SendMsgRequest request)
         {
              lock (this) {
                 unorderedCmd.Add(request.Nick, request.Msg);
             }
 
             Console.WriteLine($"Msg received from client {request.Nick}");
-            SendMsgReply reply = new SendMsgReply();
+            CompareAndSwapReply reply = new CompareAndSwapReply();
 
             reply.Msg = output;
 
@@ -60,12 +76,33 @@ namespace chatPaxos {
 
             server.Start();
 
+            var reply = null;
+
+            var paxosPorts = new List<int> { 1004, 1005, 1006};
+            var paxosStubList = new List<ChatServerService.ChatServerServiceClient>();
+
+            for(int i = 0; i < paxosPorts.Count(); i++)
+            {
+                channel = GrpcChannel.ForAddress("http://" + serverName + ":" + serverPorts[i].ToString());
+                paxosStubList[i] = new ChatServerService.ChatServerServiceClient(channel);
+            }
+
             Console.WriteLine(startupMessage);
             //Configuring HTTP for client connections in Register method
             AppContext.SetSwitch(
   "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             while (true)
             {
+                if(PaxosService.getNr() == 3) { 
+                    for(int i = 0; i < paxosPorts.Count(); i++)
+                    {
+                        reply = paxosStubList[i].Decide(new DecideRequest
+                        {
+                            Nick = port,
+                            Msg = PaxosService.getUnorderedList()
+                        });
+                    }
+                }
             }
         }
     }

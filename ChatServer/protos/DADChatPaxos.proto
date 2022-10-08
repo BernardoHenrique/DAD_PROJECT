@@ -1,13 +1,13 @@
 ﻿syntax = "proto3";
 
 service ChatPaxos {
-  rpc SendMsg (SendMsgRequest) returns (SendMsgReply);
+  rpc CompareAndSwap (CompareAndSwapRequest) returns (CompareAndSwapReply);
 }
 
-message SendMsgRequest {
+message CompareAndSwapRequest {
   string nick = 1;
   repeated string msg = 2;	
 }
-message SendMsgReply {
+message CompareAndSwapReply {
 	repeated string msg = 1;
 }

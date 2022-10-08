@@ -2,6 +2,7 @@
 
 service ChatPaxosService {
   rpc SendMsg (SendMsgRequest) returns (SendMsgReply);
+  rpc Decide (DecideRequest) return (DecideReply);
 }
 
 message SendMsgRequest {
@@ -11,3 +12,13 @@ message SendMsgRequest {
 message SendMsgReply {
 	repeated string msg = 1;
 }
+
+message DecideRequest {
+  string nick = 1;
+  repeated string list = 1;
+}
+message DecideReply {
+  string nick = 1;
+  repeated string list = 1;
+}
+

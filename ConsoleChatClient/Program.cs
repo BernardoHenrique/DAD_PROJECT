@@ -33,7 +33,7 @@ public class Program {
     {
         GrpcChannel channel;
 
-        Console.WriteLine("Insira a sua rassa:");
+        Console.WriteLine("Insira o seu nome:");
         string nick = Console.ReadLine();
         Console.WriteLine("Insira o seu porto:");
         string portString = Console.ReadLine();

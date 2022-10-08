@@ -23,6 +23,8 @@ namespace chatServer {
         private Dictionary<string, string> unorderedCmd =
             new Dictionary<string, string>();
 
+        private int nrCmd = 0;
+
         public ServerService() {
         }
 
@@ -41,6 +43,7 @@ namespace chatServer {
         {
              lock (this) {
                 unorderedCmd.Add(request.Nick, request.Msg);
+                nrCmd += 1;
             }
 
             Console.WriteLine($"Msg received from client {request.Nick}");
@@ -129,21 +132,26 @@ namespace chatServer {
                 paxosStubList[i] = new ChatServerService.ChatServerServiceClient(channel);
             }
 
-            for(int i = 0; i < serverPorts.Count(); i++)
-            {
-                reply = chatServerStubList[i].SendMsg(new ChatClientRegisterRequest
-                {
-                    Nick = nick,
-                    Msg = unorderedCmd
-                });
-            }
-
             Console.WriteLine(startupMessage);
             //Configuring HTTP for client connections in Register method
             AppContext.SetSwitch(
   "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             while (true)
             {
+                lock (this)
+                {
+                    if(nrCmd == 5){
+                        for(int i = 0; i < paxosPorts.Count(); i++)
+                        {
+                            reply = paxosStubList[i].CompareAndSwap(new CompareAndSwapRequest
+                            {
+                                Nick = port,
+                                Msg = unorderedCmd
+                            });
+                        }
+                        nrCmd = 0;
+                    }
+                }
             }
         }
     }
