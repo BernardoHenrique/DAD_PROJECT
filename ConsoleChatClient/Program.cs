@@ -69,8 +69,17 @@ public class Program {
         Console.WriteLine(reply.ToString());
         string msg;
         while (true) {
+            Console.WriteLine("Command:");
             msg = Console.ReadLine();
-
+            /*
+            for(int i = 0; i < serverPorts.Count(); i++)
+            {
+                reply = chatServerStubList[i].SendMsg(new ChatClientRegisterRequest
+                {
+                    Nick = nick,
+                    Msg = msg
+                });
+            }*/
             
         }
     }

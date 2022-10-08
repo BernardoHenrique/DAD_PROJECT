@@ -20,7 +20,7 @@ namespace chatServer {
         private Dictionary<string, double> bankAccounts =
             new Dictionary<string, double>();
 
-        private Dictionary<string, string> msgList =
+        private Dictionary<string, string> unorderedCmd =
             new Dictionary<string, string>();
 
         public ServerService() {
@@ -40,7 +40,7 @@ namespace chatServer {
         public SendMsgReply Send(SendMsgRequest request)
         {
              lock (this) {
-                msgList.Add(request.Nick, request.Msg);
+                unorderedCmd.Add(request.Nick, request.Msg);
             }
 
             Console.WriteLine($"Msg received from client {request.Nick}");
