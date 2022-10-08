@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+
+service ChatPaxosService {
+  rpc SendMsg (SendMsgRequest) returns (SendMsgReply);
+}
+
+message SendMsgRequest {
+  string nick = 1;
+  repeated string msg = 2;	
+}
+message SendMsgReply {
+	repeated string msg = 1;
+}

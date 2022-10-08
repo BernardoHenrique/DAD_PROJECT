@@ -6,6 +6,6 @@
     "\\ConsoleChatClient",
     "\\ConsoleChatClient\\protos"
   ],
-  "SelectedNode": "\\ChatServer\\Program.cs",
+  "SelectedNode": "\\ChatServer\\protos\\DADChatServer.proto",
   "PreviewInSolutionExplorer": false
 }

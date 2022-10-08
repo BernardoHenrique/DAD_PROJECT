@@ -13,8 +13,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <Protobuf Include="protos\DADChatServer.proto" GrpcServices="Server" />
+    <Protobuf Include="protos\DADChatServer.proto" GrpcServices="Both" />
     <Protobuf Include="protos\DADChatClient.proto" GrpcServices="Client" />
+	<Protobuf Include="protos\DADChatPaxos.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

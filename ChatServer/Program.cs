@@ -108,16 +108,35 @@ namespace chatServer {
             string startupMessage;
             ServerPort serverPort;
 
+            var paxosPorts = new List<int> { 1004, 1005, 1006};
+            var paxosStubList = new List<ChatServerService.ChatServerServiceClient>();
+
             serverPort = new ServerPort(hostname, port, ServerCredentials.Insecure);
             startupMessage = "Insecure ChatServer server listening on port " + port;
 
             Server server = new Server
             {
                 Services = { ChatServerService.BindService(new ServerService()) },
-            Ports = { serverPort }
-        };
+                Ports = { serverPort }
+            };
 
             server.Start();
+
+            
+            for(int i = 0; i < paxosPorts.Count(); i++)
+            {
+                channel = GrpcChannel.ForAddress("http://" + serverName + ":" + serverPorts[i].ToString());
+                paxosStubList[i] = new ChatServerService.ChatServerServiceClient(channel);
+            }
+
+            for(int i = 0; i < serverPorts.Count(); i++)
+            {
+                reply = chatServerStubList[i].SendMsg(new ChatClientRegisterRequest
+                {
+                    Nick = nick,
+                    Msg = unorderedCmd
+                });
+            }
 
             Console.WriteLine(startupMessage);
             //Configuring HTTP for client connections in Register method

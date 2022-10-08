@@ -1,0 +1,2 @@
+obj\Release\netcoreapp3.1\protos/DADChatPaxos.cs \
+obj\Release\netcoreapp3.1\protos/DADChatPaxosGrpc.cs: protos/DADChatPaxos.proto
