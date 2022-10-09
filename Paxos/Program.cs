@@ -14,27 +14,17 @@ namespace chatPaxos {
 
         private GrpcChannel channel;
 
-        private Dictionary<string, ArrayList> unorderedCmd =
-            new Dictionary<string, ArrayList>();
-
         private Dictionary<int, ArrayList> slots =
             new Dictionary<int, ArrayList>();
 
-        private ArrayList output = new ArrayList();
-
-        private int nrRcvd = 0;
+        private ArrayList<string> output = new ArrayList<string>();
 
         public PaxosService() {
         }
 
-        public int getNr()
+        public Dictionary<int, ArrayList> getSlots()
         {
-            return nrRcvd;
-        }
-
-        public Dictionary<string, ArrayList> getUnorderedList()
-        {
-            return unorderedCmd;
+            return slots;
         }
 
         public override Task<CompareAndSwapReply> CompareAndSwap(
@@ -45,14 +35,39 @@ namespace chatPaxos {
         public CompareAndSwapReply Send(SendMsgRequest request)
         {
              lock (this) {
-                unorderedCmd.Add(request.Nick, request.Msg);
-            }
+                if (!slots.ContainsKey(request.Slot)){
+                    slots.Add(request.Slot, request.Value);
+                    output = request.Value;
+                }
+             }
 
-            Console.WriteLine($"Msg received from client {request.Nick}");
+            Console.WriteLine($"Msg received from bank}");
             CompareAndSwapReply reply = new CompareAndSwapReply();
 
-            reply.Msg = output;
+            reply.Value = output;
 
+            return reply;
+        }
+
+        public ArrayList<string> getOutput()
+        {
+            return output;
+        }
+
+        public override Task<DecideReply> Decide( DecideRequest request, ServerCallContext context){
+            return Task.FromResult(DecideAux(request));
+        }
+
+        public DecideReply DecideAux(DecideRequest request)
+        {
+            lock (this)
+            {
+                íf(!slots.ContainsKey(request.Slot)){
+                    slots.Add(request.Slot, request.Value);
+                    output = request.Value;
+                }
+            }
+            DecideReply reply = new DecideReply();
             return reply;
         }
 
@@ -60,7 +75,7 @@ namespace chatPaxos {
     class Program {
         
         public static void Main(string[] args) {
-            const int port = 1004;
+            const int port = args[0];
             const string hostname = "localhost";
             string startupMessage;
             ServerPort serverPort;
@@ -76,15 +91,18 @@ namespace chatPaxos {
 
             server.Start();
 
-            var reply = null;
+            List<DecideReply> replies = new List<DecideReply>();
 
             var paxosPorts = new List<int> { 1004, 1005, 1006};
             var paxosStubList = new List<ChatServerService.ChatServerServiceClient>();
 
             for(int i = 0; i < paxosPorts.Count(); i++)
             {
-                channel = GrpcChannel.ForAddress("http://" + serverName + ":" + serverPorts[i].ToString());
-                paxosStubList[i] = new ChatServerService.ChatServerServiceClient(channel);
+                if (serverPorts[i] != port)
+                {
+                    channel = GrpcChannel.ForAddress("http://" + serverName + ":" + serverPorts[i].ToString());
+                    paxosStubList[i] = new ChatServerService.ChatServerServiceClient(channel);
+                }
             }
 
             Console.WriteLine(startupMessage);
@@ -93,13 +111,13 @@ namespace chatPaxos {
   "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             while (true)
             {
-                if(PaxosService.getNr() == 3) { 
+                if (PaxosService.getSlots().ContainsKey(PaxosService.getSlots().Count()){ // ACEDER VALUE INDICE SLOTS){ 
                     for(int i = 0; i < paxosPorts.Count(); i++)
                     {
-                        reply = paxosStubList[i].Decide(new DecideRequest
-                        {
-                            Nick = port,
-                            Msg = PaxosService.getUnorderedList()
+                        replies[i] = paxosStubList[i].Decide(new DecideRequest
+                        {   
+                            Slot = PaxosService.getSlots().Count(),
+                            Value = PaxosService.getOutput()
                         });
                     }
                 }

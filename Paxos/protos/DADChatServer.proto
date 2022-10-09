@@ -6,6 +6,7 @@ service ChatServerService {
 
 message SendMsgRequest {
   string nick = 1;
+  int id = 3;
   repeated string msg = 2;	
 }
 message SendMsgReply {

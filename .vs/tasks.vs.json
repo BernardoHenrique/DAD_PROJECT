@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "tarefa-DADPerfectChannel",
+      "appliesTo": "DADPerfectChannel/",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "tarefa-DAD_PROJECT",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

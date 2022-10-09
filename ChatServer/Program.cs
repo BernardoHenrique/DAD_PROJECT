@@ -28,6 +28,21 @@ namespace chatServer {
         public ServerService() {
         }
 
+        public Dictionary<string, string> getList()
+        {
+            return unorderedCmd;
+        }
+
+        public int getNrCmd()
+        {
+            return nrCmd;
+        }
+
+        public void setNrCmd(int nr)
+        {
+            nrCmd = nr;
+        }
+
         public override Task<ChatClientRegisterReply> Register(
             ChatClientRegisterRequest request, ServerCallContext context) {
             Console.WriteLine("Host: " + context.Host);
@@ -106,10 +121,12 @@ namespace chatServer {
     class Program {
         
         public static void Main(string[] args) {
-            const int port = 1001;
+            const int port = args[0];
             const string hostname = "localhost";
             string startupMessage;
             ServerPort serverPort;
+
+            int slot = 0;
 
             var paxosPorts = new List<int> { 1004, 1005, 1006};
             var paxosStubList = new List<ChatServerService.ChatServerServiceClient>();
@@ -140,16 +157,17 @@ namespace chatServer {
             {
                 lock (this)
                 {
-                    if(nrCmd == 5){
+                    if(ServerService.getNrCmd() == 5){
                         for(int i = 0; i < paxosPorts.Count(); i++)
                         {
                             reply = paxosStubList[i].CompareAndSwap(new CompareAndSwapRequest
                             {
-                                Nick = port,
-                                Msg = unorderedCmd
+                                Slot = slot,
+                                Value = ServerService.getList()
                             });
                         }
-                        nrCmd = 0;
+                        ServerService.setNrCmd(0);
+                        slot++;
                     }
                 }
             }

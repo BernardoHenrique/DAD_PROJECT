@@ -26,6 +26,7 @@ message BcastMsgReply {
 
 message SendMsgRequest {
   string nick = 1;
+  int id = 3;
   string msg = 2;	
 }
 message SendMsgReply {

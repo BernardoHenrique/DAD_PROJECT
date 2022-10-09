@@ -1,24 +1,23 @@
 ﻿syntax = "proto3";
 
 service ChatPaxosService {
-  rpc SendMsg (SendMsgRequest) returns (SendMsgReply);
-  rpc Decide (DecideRequest) return (DecideReply);
+  rpc CompareAndSwap (CompareAndSwapRequest) returns (CompareAndSwapReply);
+  rpc Decide (DecideRequest) returns (DecideReply);
 }
 
-message SendMsgRequest {
-  string nick = 1;
-  repeated string msg = 2;	
+message CompareAndSwapRequest {
+  int slot = 1;
+  repeated string value = 2;	
 }
-message SendMsgReply {
-	repeated string msg = 1;
+message CompareAndSwapReply {
+	repeated string value = 1;
 }
 
-message DecideRequest {
-  string nick = 1;
-  repeated string list = 1;
+message DecideRequest{
+	repeated string value = 1;
+	int slot = 2;
 }
+
 message DecideReply {
-  string nick = 1;
-  repeated string list = 1;
+	bool ok = 1;
 }
-

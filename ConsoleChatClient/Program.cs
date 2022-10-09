@@ -33,6 +33,8 @@ public class Program {
     {
         GrpcChannel channel;
 
+        private int idCounter = 0;
+
         Console.WriteLine("Insira o seu nome:");
         string nick = Console.ReadLine();
         Console.WriteLine("Insira o seu porto:");
@@ -71,15 +73,16 @@ public class Program {
         while (true) {
             Console.WriteLine("Command:");
             msg = Console.ReadLine();
-            /*
+            idCounter++;
             for(int i = 0; i < serverPorts.Count(); i++)
             {
                 reply = chatServerStubList[i].SendMsg(new ChatClientRegisterRequest
                 {
                     Nick = nick,
-                    Msg = msg
+                    Msg = msg,
+                    Id = idCounter
                 });
-            }*/
+            }
             
         }
     }

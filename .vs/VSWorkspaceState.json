@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\ChatServer",
-    "\\ChatServer\\Properties",
     "\\ChatServer\\protos",
-    "\\ConsoleChatClient\\protos",
+    "\\ConsoleChatClient",
+    "\\Paxos",
     "\\Paxos\\protos"
   ],
+  "SelectedNode": "\\Paxos\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
